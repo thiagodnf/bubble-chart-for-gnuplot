@@ -1,0 +1,25 @@
+{
+	"name": "wesb-stats",
+	"version": "1.0.0",
+	"description": "Statistics of Publications of Brazilian Workshop on Search-Based Software Engineering",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+        "release": "node build.js --release",
+        "build": "node build.js"
+	},
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"files": [
+		"app.js"
+	],
+	"author": "Thiago Nascimento Ferreira",
+	"license": "MIT",
+	"homepage": "http://thiagodnf.github.io/wesb-stats",
+	"dependencies": {
+		"serve-static": "",
+		"connect": "",
+		"network":""
+  	}
+}
