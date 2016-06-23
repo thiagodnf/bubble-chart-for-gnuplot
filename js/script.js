@@ -259,6 +259,21 @@ $(function(){
 
 	$("#export").click(function(event){
 		var script = $("#script").val();
-		$(this).attr("href","data:text/plain;charset=utf-8," + script);
+
+		var blob = new Blob([script], {type: "text/plain;charset=utf-8"});
+
+		var a = document.createElement("a");
+		document.body.appendChild(a);
+    	a.style = "display: none";
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "script.gnu";
+		a.click();
+
+
+		//$(this).attr("href","data:text/plain;charset=utf-8," + script);
+	});
+
+	$('.select').selectpicker({
+	  size: 8
 	});
 });

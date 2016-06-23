@@ -35,6 +35,7 @@
         <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-select.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -81,24 +82,24 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="circle-color">Circle Color</label>
-                                    <select class="form-control" id="circle-color">
-                                        <option value="#7cb5ec">Blue</option>
-                                        <option value="#434348">Black</option>
-                                        <option value="#90ed7d">Green</option>
-                                        <option value="#f7a35c">Orange</option>
-                                        <option value="#8085e9">Purple</option>
-                                        <option value="#f15c80">Pink</option>
-                                        <option value="#e4d354">Yellow</option>
-                                        <option value="#2b908f">Cornflower Blue</option>
-                                        <option value="#f45b5b">Red</option>
-                                        <option value="#91e8e1">Aquamarine</option>
+                                    <select class="form-control select" id="circle-color">
+                                        <option style="background: #7cb5ec" value="#7cb5ec">Blue</option>
+                                        <option style="background: #434348; color: white" value="#434348">Black</option>
+                                        <option style="background: #90ed7d" value="#90ed7d">Green</option>
+                                        <option style="background: #f7a35c" value="#f7a35c">Orange</option>
+                                        <option style="background: #8085e9" value="#8085e9">Purple</option>
+                                        <option style="background: #f15c80" value="#f15c80">Pink</option>
+                                        <option style="background: #e4d354" value="#e4d354">Yellow</option>
+                                        <option style="background: #2b908f" value="#2b908f">Cornflower Blue</option>
+                                        <option style="background: #f45b5b" value="#f45b5b">Red</option>
+                                        <option style="background: #91e8e1" value="#91e8e1">Aquamarine</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="text-color">Text Color</label>
-                                    <select class="form-control" id="text-color">
+                                    <select class="form-control select" id="text-color">
                                         <option value="black" selected>Black</option>
                                         <option value="white">White</option>
                                     </select>
@@ -109,7 +110,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="wrap-text">Wrap Text</label>
-                                    <select class="form-control" id="wrap-text">
+                                    <select class="form-control select" id="wrap-text">
                                         <option value="Yes" selected>Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -118,7 +119,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="output">Output</label>
-                                    <select class="form-control" id="output">
+                                    <select class="form-control select" id="output">
                                         <option value="pdf" selected>PDF</option>
                                         <option value="png">PNG</option>
                                         <option value="jpg">JPG</option>
@@ -181,14 +182,13 @@ EOF
                         </form>
                    </div>
                    <div class="modal-footer">
-                       <!--<a href="#" class="btn btn-default" download="script.gnu" id="export">Export do File</a>-->
+                       <a href="#" class="btn btn-default" download="script.gnu" id="export">Export do File</a>
                        <button type="button" class="btn btn-default" id="btn-copy" data-clipboard-target="#script">Copy to clipboard</button>
                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                    </div>
                </div>
            </div>
        </div>
-
 
         <div class="modal" tabindex="-1" role="dialog" id="about" aria-labelledby="label-about">
             <div class="modal-dialog" role="document">
@@ -201,12 +201,11 @@ EOF
                             <div class="col-xs-10">
                                 <h4>Buble Chart for Gnuplot</h4>
                                 <p><small>Version: 1.0.0, Developed by <a href="http://github.com/thiagodnf/" target="-_blank">Thiago Nascimento</a></small></p>
-                                <p><small>This tool generates a script that plots a bubble chart  in the gnuplot tool.</small></p>
-                                <p><small><a href="http://github.com/thiagodnf/bubble-chart-for-gnuplot/" target="_blank">How does it work?</a></small></p>
-                                <p><small><em>If you encounter any problems, please use the <a href="https://github.com/thiagodnf/bubble-chart-for-gnuplot/issues" target="-_blank">GitHub Issue Tracker</a>. <br>Did you  like this project?  Let me know.</em></small></p>
+                                <p>This tool generates a script that plots a bubble chart  in the gnuplot tool.</p>
+                                <p><a href="http://github.com/thiagodnf/bubble-chart-for-gnuplot/" target="_blank">How does it work?</a></p>
+                                <p><em>If you encounter any problems, please use the <a href="https://github.com/thiagodnf/bubble-chart-for-gnuplot/issues" target="-_blank">GitHub Issue Tracker</a>. <br>Did you  like this project? Let me know.</em></p>
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary btn-close" data-dismiss="modal">Close</button>
@@ -220,6 +219,7 @@ EOF
         <script type="text/javascript" charset="utf8" src="js/jquery.min.js"></script>
         <script type="text/javascript" charset="utf8" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" charset="utf8" src="js/clipboard.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="js/bootstrap-select.min.js"></script>
         <script type="text/javascript" charset="utf8" src="js/script.js"></script>
 
         <script>
