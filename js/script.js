@@ -5,192 +5,256 @@ String.prototype.replaceAll = function(search, replacement) {
     return this.split(search).join(replacement);
 };
 
-function getLines(){
-	var data = $("#data").val().trim();
+function getLineNumber(data, str){
+	var lines = data.trim().split(/\r*\n/)
 
-	return data.split(/\r*\n/);
-}
-
-function defineIndexFor(object){
-	var index = 1;
-
-	for(var i in object){
-		object[i] = index++;
-	}
-
-	return object;
-}
-
-function getDimensions(lines){
-	var dim = {
-		x: {},
-		y: {},
-		z: {}
-	};
+	var foundLine = -1;
 
 	$.each(lines, function(index, line){
-		var array = line.split(";");
-
-		dim.x[array[0]] = array[0];
-		dim.y[array[1]] = array[1];
-
-		if(array.length == 4){
-			dim.z[array[2]] = array[2];
+		if(line.trim() == str.trim()){
+			foundLine = index + 1;
 		}
 	});
 
-	defineIndexFor(dim.x);
-	defineIndexFor(dim.y);
-	defineIndexFor(dim.z);
-
-	return dim;
+	return foundLine;
 }
 
-function getYRange(dimY){
+function getLines(str){
+	var lines = str.trim().split(/\r*\n/)
+
+	if(lines.length == 0){
+		throw Error("Lines cannot be empty");
+	}
+
+	return lines;
+}
+
+function getSize(isWidescreen){
+	var option = $("#output").val();
+
+	if(option == "pdf"){
+		return (isWidescreen) ? "8,4" : "4,4";
+	}
+
+	return (isWidescreen) ? "800,400" : "400,400";
+}
+
+function getOutput(){
+	var option = $("#output").val();
+
+	if(option == "pdf"){
+		return "set terminal pdf size {SIZE} enhanced\n set output 'out.pdf'";
+	}else if(option == "jpg"){
+		return "set terminal jpeg size {SIZE} enhanced\n set output 'out.jpg'";
+	}else if(option == "png"){
+		return "set terminal png size {SIZE} enhanced\n set output 'out.png'";
+	}else{
+		throw Error("The output cannot be identified");
+	}
+}
+
+function getInformations(data){
+	var informations = data.trim().split(/\#/);
+
+	var size = informations.length;
+
+	// Data validate
+
+	if(size <= 0 || size >= 3){
+		throw Error("You should to define 1 or 2 informations. You defined " + size + " informations");
+	}
+
+	$.each(informations, function(index, value){
+		if(value.trim() == ""){
+			throw Error("The dimension cannot be empty");
+		}
+	});
+
+	return informations;
+}
+
+
+function getRange(obj){
 	var min = Number.MAX_VALUE;
 	var max = Number.MIN_VALUE;
 
-	for(var i in dimY){
-		if(dimY[i] < min){
-			min = dimY[i];
+	for(var i in obj){
+		if(obj[i] < min){
+			min = obj[i];
 		}
-		if(dimY[i] > max){
-			max = dimY[i];
+		if(obj[i] > max){
+			max = obj[i];
 		}
 	}
 
 	return (min-1) + ":" + (max + 1);
 }
 
-function getXRange(dimX, dimZ){
-	var min = Number.MAX_VALUE;
-	var max = Number.MIN_VALUE;
+function getBottomMargim(obj){
+	var margin = 2;
 
-	for(var i in dimX){
-		if(dimX[i] < min){
-			min = dimX[i];
-		}
-		if(dimX[i] > max){
-			max = dimX[i];
+	var maxValue = 0;
+
+	for(var i in obj){
+		var value = i.split("\\n").length-1;
+
+		if(value > maxValue){
+			maxValue = value;
 		}
 	}
 
-	for(var i in dimZ){
-		if(dimZ[i] < min){
-			min = dimZ[i];
-		}
-		if(dimZ[i] > max){
-			max = dimZ[i];
-		}
-	}
-
-	return (min-1) + ":" + (max + 1);
+	return margin + maxValue;
 }
 
-function getYTics(obj){
+function getTics(obj){
 	var tics = "";
 
 	for(var i in obj){
-		tics += "\""+i+"\" " + obj[i] + ",";
+		tics += "\"" + i + "\" " + obj[i] + ",";
 	}
 
 	return tics.substring(0, tics.length - 1);;
 }
 
-function getXTics(dimX, dimZ){
-	var tics = "";
-
-	for(var i in dimX){
-		tics += "\""+i+"\" " + dimX[i] + ",";
+function wrap(str){
+	if($("#wrap-text").val() == "Yes"){
+		return str.replaceAll(" ","\\n");
 	}
 
-	for(var i in dimZ){
-		tics += "\""+i+"\" -" + dimZ[i] + ",";
-	}
-
-	return tics.substring(0, tics.length - 1);;
+	return str;
 }
 
-function normalize(value, min, max){
-	return (value - min) / (max - min);
-}
+function generate(data){
+	var dim = {
+		x: {},
+		y: {},
+	};
 
-function getDataForText(lines, dim){
-	var data = "";
+	var dataCircle = "",
+		dataText = "";
 
-	$.each(lines, function(index, line){
+	var indexX = 1;
+	var indexY = 1;
 
-		var array = line.split(";");
+	var informations = getInformations(data);
 
-		data += dim.x[array[0]] + " "+dim.y[array[1]] + " " + array[2] + "\n";
+	$.each(informations, function(informationIndex, information){
+		var lines = getLines(information);
+
+		$.each(lines, function(lineIndex, line){
+			var arrays = line.split(";");
+
+			if(arrays.length != 3){
+				throw Error("A line should be 3 values separated by ';'. Line " + getLineNumber(data, line));
+			}
+
+			$.each(arrays, function(index, array){
+				if( ! array.trim()){
+					throw Error("Column " + (index + 1) + " cannot be empty. Line " + getLineNumber(data, line));
+				}
+
+				if(index == 2 && ! $.isNumeric(array)){
+					throw Error("Column 3 should be a number. Line " + getLineNumber(data, line));
+				}
+			});
+
+			if( ! dim.x[wrap(arrays[0])]){
+				dim.x[wrap(arrays[0])] = (informationIndex == 0)? indexX++: --indexX;
+			}
+			if( ! dim.y[wrap(arrays[1])]){
+				dim.y[wrap(arrays[1])] = indexY++;
+			}
+
+			var value = arrays[2] * (minValue / maxValue);
+
+			dataCircle += dim.x[wrap(arrays[0])] + " " + dim.y[arrays[1]] + " " + value + "\n";
+			dataText += dim.x[wrap(arrays[0])] + " " + dim.y[arrays[1]] + " " + arrays[2] + "\n";
+		});
+
+		indexX = 0;
 	});
-
-	return data;
-}
-
-function getDataForCircle(lines, dim){
-	var data = "";
-
-	$.each(lines, function(index, line){
-
-		var array = line.split(";");
-
-		var value = array[2]*(minValue/maxValue);
-
-		data += dim.x[array[0]] + " "+dim.y[array[1]] + " " + value + "\n";
-	});
-
-	return data;
-}
-
-function generate(){
-
-	var lines = getLines();
-
-	var dim = getDimensions(lines);
 
 	var model = $("#model").text();
 
-	model = model.replaceAll("{Y_TICS}", getYTics(dim.y));
-	model = model.replaceAll("{X_TICS}", getXTics(dim.x, dim.z));
-	model = model.replaceAll("{X_RANGE}", getXRange(dim.x, dim.z));
-	model = model.replaceAll("{Y_RANGE}", getYRange(dim.y));
+	model = model.replaceAll("{X_TICS}", getTics(dim.x));
+	model = model.replaceAll("{Y_TICS}", getTics(dim.y));
+	model = model.replaceAll("{X_RANGE}", getRange(dim.x));
+	model = model.replaceAll("{Y_RANGE}", getRange(dim.y));
 	model = model.replaceAll("{SCALE}", 1);
-	model = model.replaceAll("{DATA_CIRCLE}", getDataForCircle(lines, dim));
-	model = model.replaceAll("{DATA_TEXT}", getDataForText(lines, dim));
-	model = model.replaceAll("{CIRCLE_COLOR}", $("#color").val());
-	model = model.replaceAll("{TEXT_COLOR}", $("#textcolor").val());
-	model = model.replaceAll("{ROTATE}", $("#rotation").val());
+	model = model.replaceAll("{CIRCLE_COLOR}", $("#circle-color").val());
+	model = model.replaceAll("{TEXT_COLOR}", $("#text-color").val());
+	model = model.replaceAll("{ROTATE}", "0");
+	model = model.replaceAll("{DATA_CIRCLE}", dataCircle);
+	model = model.replaceAll("{DATA_TEXT}", dataText);
+	model = model.replaceAll("{B_MARGIN}", getBottomMargim(dim.x));
+	model = model.replaceAll("{OUTPUT}", getOutput());
 
-	$("#script").text(model);
+
+	if(informations.length > 1){
+		model = model.replaceAll("{Y_AXIS}", "set yzeroaxis \n set ytics axis \n set ytics center");
+		model = model.replaceAll("{SIZE}", getSize(true));
+	}else{
+		model = model.replaceAll("{Y_AXIS}", "");
+		model = model.replaceAll("{SIZE}", getSize(false));
+	}
+
+	$("#script").val(model);
 
 	$("#modal-result").modal('show');
 }
 
-function example(){
-
+function getExampleOfOneInformation(){
 	var str = "";
 
-	str += "A;D;10\n";
-	str += "B;E;4\n";
-	str += "A;E;8\n";
-	str += "C;F;1\n";
-	str += "C;D;15\n";
+	str += "Red;Circle;10\n";
+	str += "White;Triangle;4\n";
+	str += "Red;Triangle;8\n";
+	str += "Green;Ellipse;1\n";
+	str += "Blue;Rectangle;15\n";
 
-	$("#data").val(str);
+	return str;
+}
+
+function getExampleOfTwoInformations(){
+
+	var str = getExampleOfOneInformation();
+
+	str += "#\n";
+	str += "Gold;Circle;6\n";
+	str += "Silver;Rectangle;2\n";
+	str += "Silver;Triangle;7\n";
+	str += "Iron;Triangle;9\n";
+	str += "Titanium;Rectangle;1\n";
+
+	return str;
 }
 
 $(function(){
 
-	new Clipboard('#copy');
+	new Clipboard('#btn-copy');
 
-	$('#generate').click(function (event) {
+	$('#btn-generate').click(function (event) {
 		event.preventDefault();
-		generate();
+
+		var data = $("#data").val().trim();
+
+		if(data){
+			try{
+				generate(data);
+			}catch(error){
+				alert(error);
+			}
+		}else{
+			alert("Data field cannot be empty");
+		}
 	});
 
-	$("#example").click(function(event){
-		example();
+	$("#btn-example-one-information").click(function(event){
+		$("#data").val(getExampleOfOneInformation());
+	});
+
+	$("#btn-example-two-informations").click(function(event){
+		$("#data").val(getExampleOfTwoInformations());
 	});
 
 	$("#export").click(function(event){

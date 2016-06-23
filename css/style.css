@@ -2,12 +2,19 @@ body{
     color: #757575;
     background-color: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow-y: scroll;
+
+    margin-top: 70px;
 }
 
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
+}
+
+#about h4{
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {

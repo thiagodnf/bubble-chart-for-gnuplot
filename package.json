@@ -1,7 +1,7 @@
 {
-	"name": "wesb-stats",
+	"name": "bubble-chart-for-gnuplot",
 	"version": "1.0.0",
-	"description": "Statistics of Publications of Brazilian Workshop on Search-Based Software Engineering",
+	"description": "This tool generates a script that plots a bubble chart in the gnuplot tool",
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js",
@@ -14,9 +14,9 @@
 	"files": [
 		"app.js"
 	],
-	"author": "Thiago Nascimento Ferreira",
+	"author": "Thiago Nascimento",
 	"license": "MIT",
-	"homepage": "http://thiagodnf.github.io/wesb-stats",
+	"homepage": "https://github.com/thiagodnf/bubble-chart-for-gnuplot",
 	"dependencies": {
 		"serve-static": "",
 		"connect": "",

@@ -5,7 +5,7 @@ var connect = require('connect');
 
 connect().use(serveStatic(__dirname)).listen(port);
 
-console.log("Running wesb-stats");
+console.log("Running bubble-chart-for-gnuplot");
 
 network.get_active_interface(function(err, obj) {
     console.log('The magic happens at http://localhost:' + port);
