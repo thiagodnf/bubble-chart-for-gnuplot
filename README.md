@@ -53,20 +53,7 @@ The result is:
 
 ## Questions
 
-<ul>
-  <li>How can I increase the circle size?
-    <ul>
-      <li></li>
-    </ul>
-  </li>
-</ul>
-
-
-2. Another item
-⋅⋅* Unordered sub-list.
-
-* How can I increase the circle size?
-...* df
+* How can I increase the circle size? Use the SCALE option to increase or decrease the circle size.
 
 ## Contact
 
