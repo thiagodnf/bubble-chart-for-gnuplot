@@ -63,4 +63,4 @@ Released under the terms of MIT License.
 
 If you encounter any problems, please use the [GitHub Issue Tracker](https://github.com/thiagodnf/bubble-chart-for-gnuplot/issues) .
 
-If you like publications.js, let me know.
+If you like this projet, let me know.
