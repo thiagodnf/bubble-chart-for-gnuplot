@@ -55,6 +55,10 @@ The result is:
 
 * How can I increase the circle size? Use the SCALE option to increase or decrease the circle size.
 
+## License
+
+Released under the terms of MIT License.
+
 ## Contact
 
 If you encounter any problems, please use the [GitHub Issue Tracker](https://github.com/thiagodnf/bubble-chart-for-gnuplot/issues) .
