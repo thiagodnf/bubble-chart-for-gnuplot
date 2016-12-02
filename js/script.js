@@ -167,8 +167,8 @@ function generate(data){
 
 			var value = arrays[2] * (minValue / maxValue);
 
-			dataCircle += dim.x[wrap(arrays[0])] + " " + dim.y[arrays[1]] + " " + value + "\n";
-			dataText += dim.x[wrap(arrays[0])] + " " + dim.y[arrays[1]] + " " + arrays[2] + "\n";
+			dataCircle += dim.x[wrap(arrays[0])] + " " + dim.y[wrap(arrays[1])] + " " + value + "\n";
+			dataText += dim.x[wrap(arrays[0])] + " " + dim.y[wrap(arrays[1])] + " " + arrays[2] + "\n";
 		});
 
 		indexX = 0;
