@@ -54,16 +54,14 @@
                     <div id="navbar" class="navbar-collapse collapse">
             			<ul class="nav navbar-nav">
             				<li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Example <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Examples <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" id="btn-example-one-information">One Information</a></li>
                                     <li><a href="#" id="btn-example-two-informations">Two Informations</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-            				<li><a href="https://github.com/thiagodnf/bubble-chart-for-gnuplot" target="_blank">Source Code</a></li>
-                             <li><a href="#" data-toggle="modal" data-target="#about" id="btn-about" >About</a></li>
+                            <li><a href="https://github.com/thiagodnf/bubble-chart-for-gnuplot" target="_blank">Source Code</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#about" id="btn-about" >About</a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,12 +71,11 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label for="data">Data</label>
                             <textarea autocomplete="off" class="form-control" rows="20" id="data" placeholder="Put the values separate by ';'. Click in the above Example button to see how to put the input in this tool."></textarea>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="row">
+                    <div class="col-sm-4" id="box">
+                        <div class="row" >
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="circle-color">Circle Color</label>
@@ -127,11 +124,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="widescreen">Widescreen</label>
+                                    <select class="form-control select" id="widescreen">
+                                        <option value="1" selected>Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="scale">Scale</label>
+                                    <select class="form-control select" id="scale">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-blue" id="btn-generate">Generate</button>
                     </div>
                 </div>
             </form>
 
-            <button class="btn btn-success" id="btn-generate">Generate</button>
         </div>
 
         <textarea class="hide" id="model">

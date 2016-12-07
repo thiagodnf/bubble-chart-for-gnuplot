@@ -180,7 +180,7 @@ function generate(data){
 	model = model.replaceAll("{Y_TICS}", getTics(dim.y));
 	model = model.replaceAll("{X_RANGE}", getRange(dim.x));
 	model = model.replaceAll("{Y_RANGE}", getRange(dim.y));
-	model = model.replaceAll("{SCALE}", 1);
+	model = model.replaceAll("{SCALE}", $("#scale").val());
 	model = model.replaceAll("{CIRCLE_COLOR}", $("#circle-color").val());
 	model = model.replaceAll("{TEXT_COLOR}", $("#text-color").val());
 	model = model.replaceAll("{ROTATE}", "0");
@@ -189,14 +189,21 @@ function generate(data){
 	model = model.replaceAll("{B_MARGIN}", getBottomMargim(dim.x));
 	model = model.replaceAll("{OUTPUT}", getOutput());
 
+    var isWidescreen = false;
 
-	if(informations.length > 1){
-		model = model.replaceAll("{Y_AXIS}", "set yzeroaxis \n set ytics axis \n set ytics center");
-		model = model.replaceAll("{SIZE}", getSize(true));
+    if($("#widescreen").val() == 1){
+        isWidescreen = true;
+    }
+
+	if(informations.length == 1){
+        model = model.replaceAll("{Y_AXIS}", "");
+	}else if(informations.length == 2){
+        model = model.replaceAll("{Y_AXIS}", "set yzeroaxis \n set ytics axis \n set ytics center");
 	}else{
-		model = model.replaceAll("{Y_AXIS}", "");
-		model = model.replaceAll("{SIZE}", getSize(false));
-	}
+        alert("Only two dimensions are supported");
+    }
+
+    model = model.replaceAll("{SIZE}", getSize(isWidescreen));
 
 	$("#script").val(model);
 
@@ -258,6 +265,8 @@ $(function(){
 	});
 
 	$("#export").click(function(event){
+        event.preventDefault();
+
 		var script = $("#script").val();
 
 		var blob = new Blob([script], {type: "text/plain;charset=utf-8"});
@@ -269,8 +278,7 @@ $(function(){
 		a.download = "script.gnu";
 		a.click();
 
-
-		//$(this).attr("href","data:text/plain;charset=utf-8," + script);
+        return false;
 	});
 
 	$('.select').selectpicker({
