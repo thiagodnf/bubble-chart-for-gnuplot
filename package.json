@@ -1,7 +1,7 @@
 {
 	"name": "bubble-chart-for-gnuplot",
 	"version": "1.0.0",
-	"description": "This tool generates a script that plots a bubble chart in the gnuplot tool",
+	"description": "Bubble Chart for Gnuplot",
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js",
@@ -14,7 +14,7 @@
 	"files": [
 		"app.js"
 	],
-	"author": "Thiago Nascimento",
+	"author": "thiagodnf",
 	"license": "MIT",
 	"homepage": "https://github.com/thiagodnf/bubble-chart-for-gnuplot",
 	"dependencies": {
