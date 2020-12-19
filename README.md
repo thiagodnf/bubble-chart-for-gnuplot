@@ -1,5 +1,6 @@
-![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/img/favicon/android-icon-72x72.png)
-# Bubble Chart for Gnuplot
+
+<img src="https://user-images.githubusercontent.com/114015/102698819-40daf980-420e-11eb-889d-550e1a44c253.png" width="200px"/>
+
 
 This tool generates a bubble chart script for Gnuplot
 
