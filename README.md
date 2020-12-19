@@ -72,7 +72,7 @@ npm run dev
 If you want to commit some changes, run the following command:
 
 ```sh
-npm run eslint-fix
+npm run lint-fix
 ```
 
 ## Q&A

@@ -33,24 +33,24 @@ function Index(props) {
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="circle-color">Circle Color</label>
-                                                <select className="form-control selectPicker" id="circle-color" defaultValue={'#7cb5ec'}>
-                                                    <option style={{background: '#7cb5ec'}} value="#7cb5ec">Blue</option>
-                                                    <option style={{background: '#434348'}} value="#434348">Black</option>
-                                                    <option style={{background: '#90ed7d'}} value="#90ed7d">Green</option>
-                                                    <option style={{background: '#f7a35c'}} value="#f7a35c">Orange</option>
-                                                    <option style={{background: '#8085e9'}} value="#8085e9">Purple</option>
-                                                    <option style={{background: '#f15c80'}} value="#f15c80">Pink</option>
-                                                    <option style={{background: '#e4d354'}} value="#e4d354">Yellow</option>
-                                                    <option style={{background: '#2b908f'}} value="#2b908f">Cornflower Blue</option>
-                                                    <option style={{background: '#f45b5b'}} value="#f45b5b">Red</option>
-                                                    <option style={{background: '#91e8e1'}} value="#91e8e1">Aquamarine</option>
+                                                <select className="form-control selectPicker" id="circle-color" defaultValue={"#7cb5ec"}>
+                                                    <option style={{background: "#7cb5ec"}} value="#7cb5ec">Blue</option>
+                                                    <option style={{background: "#434348"}} value="#434348">Black</option>
+                                                    <option style={{background: "#90ed7d"}} value="#90ed7d">Green</option>
+                                                    <option style={{background: "#f7a35c"}} value="#f7a35c">Orange</option>
+                                                    <option style={{background: "#8085e9"}} value="#8085e9">Purple</option>
+                                                    <option style={{background: "#f15c80"}} value="#f15c80">Pink</option>
+                                                    <option style={{background: "#e4d354"}} value="#e4d354">Yellow</option>
+                                                    <option style={{background: "#2b908f"}} value="#2b908f">Cornflower Blue</option>
+                                                    <option style={{background: "#f45b5b"}} value="#f45b5b">Red</option>
+                                                    <option style={{background: "#91e8e1"}} value="#91e8e1">Aquamarine</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="text-color">Text Color</label>
-                                                <select className="form-control selectPicker" id="text-color" defaultValue={'black'}>
+                                                <select className="form-control selectPicker" id="text-color" defaultValue={"black"}>
                                                     <option value="black">Black</option>
                                                     <option value="white">White</option>
                                                 </select>
@@ -61,7 +61,7 @@ function Index(props) {
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="wrap-text">Wrap Text</label>
-                                                <select className="form-control selectPicker" id="wrap-text" defaultValue={'Yes'}>
+                                                <select className="form-control selectPicker" id="wrap-text" defaultValue={"Yes"}>
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
                                                 </select>
@@ -70,7 +70,7 @@ function Index(props) {
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="output">Output</label>
-                                                <select className="form-control selectPicker" id="output" defaultValue={'pdf'}>
+                                                <select className="form-control selectPicker" id="output" defaultValue={"pdf"}>
                                                     <option value="pdf">PDF</option>
                                                     <option value="png">PNG</option>
                                                     <option value="jpg">JPG</option>
@@ -82,7 +82,7 @@ function Index(props) {
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="widescreen">Widescreen</label>
-                                                <select className="form-control selectPicker" id="widescreen" defaultValue={'1'}>
+                                                <select className="form-control selectPicker" id="widescreen" defaultValue={"1"}>
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
                                                 </select>
@@ -91,7 +91,7 @@ function Index(props) {
                                         <div className="col-6">
                                             <div className="form-group">
                                                 <label htmlFor="scale">Scale</label>
-                                                <select className="form-control selectPicker" id="scale" defaultValue={'1'}>
+                                                <select className="form-control selectPicker" id="scale" defaultValue={"1"}>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>

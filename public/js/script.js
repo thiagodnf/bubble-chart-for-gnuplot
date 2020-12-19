@@ -6,7 +6,7 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 function getLineNumber(data, str){
-	var lines = data.trim().split(/\r*\n/)
+	var lines = data.trim().split(/\r*\n/);
 
 	var foundLine = -1;
 
@@ -20,7 +20,7 @@ function getLineNumber(data, str){
 }
 
 function getLines(str){
-	var lines = str.trim().split(/\r*\n/)
+	var lines = str.trim().split(/\r*\n/);
 
 	if(lines.length == 0){
 		throw Error("Lines cannot be empty");
@@ -207,7 +207,7 @@ function generate(data){
 
 	$("#script").val(model);
 
-	$("#modal-result").modal('show');
+	$("#modal-result").modal("show");
 }
 
 function getExampleOfOneInformation(){
@@ -238,9 +238,9 @@ function getExampleOfTwoInformations(){
 
 $(function(){
 
-    new ClipboardJS('.btn');
+    new ClipboardJS(".btn");
 
-    $('#form-generate').submit((event) =>{
+    $("#form-generate").submit((event) =>{
 
         event.preventDefault();
 
