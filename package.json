@@ -1,7 +1,7 @@
 {
 	"name": "bubble-chart-for-gnuplot",
 	"version": "1.0.0",
-	"description": "This tool generates a script that plots a bubble chart in the gnuplot tool",
+	"description": "This tool generates a bubble chart script for Gnuplot",
 	"scripts": {
 		"dev": "next dev",
 		"lint": "npx eslint .",

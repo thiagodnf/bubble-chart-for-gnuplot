@@ -1,11 +1,11 @@
 ![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/img/favicon/android-icon-72x72.png)
 # Bubble Chart for Gnuplot
 
-This tool generates a script that plots a bubble chart in the gnuplot tool
+This tool generates a bubble chart script for Gnuplot
 
 ## How to use
 
-You need to enter labels separated by ";". Further informations, use the "example" option on app. Generate the script and run following command on terminal:
+You need to enter labels separated by ";". Further information, use the "example" option on app. Generate the script and run following command on terminal:
 
 ```text
 $ gnuplot script.gnu
