@@ -222,7 +222,7 @@ function getExampleOfOneInformation(){
 	return str;
 }
 
-function getExampleOfTwoInformations(){
+function getExampleOfTwoInformation(){
 
 	var str = getExampleOfOneInformation();
 
@@ -264,7 +264,7 @@ $(function(){
 	});
 
 	$("#btn-example-two-information").click(function(event){
-		$("#data").val(getExampleOfTwoInformations());
+		$("#data").val(getExampleOfTwoInformation());
 	});
 
 	$("#export").click(function(event){
