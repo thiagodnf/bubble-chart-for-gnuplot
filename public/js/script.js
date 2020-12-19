@@ -265,7 +265,41 @@ $(function(){
 
 	$("#btn-example-two-information").click(function(event){
 		$("#data").val(getExampleOfTwoInformation());
-	});
+    });
+
+    $("#btn-invert").click(function(event){
+
+        const data = $("#data").val().trim();
+
+        if (!data) {
+            return;
+        }
+
+        const lines = data.split("\n");
+
+        const output = [];
+
+        lines.forEach(line => {
+
+            line = line.trim();
+
+            if (line !== "#") {
+
+                const columns = line.split(";");
+
+                const aux = columns[0];
+                columns[0] = columns[1];
+                columns[1] = aux;
+
+                output.push(columns.join(';'));
+
+            } else {
+                output.push(line);
+            }
+        });
+
+        $("#data").val(output.join('\n'));
+    });
 
 	$("#export").click(function(event){
         event.preventDefault();

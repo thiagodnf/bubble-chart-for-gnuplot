@@ -18,10 +18,11 @@ function Index(props) {
                         <div className="col-lg-8 mb-3">
                             <Card className="shadow">
                                 <Card.Header>Data</Card.Header>
-                                <Card.Body className="pb-0">
+                                <Card.Body>
                                     <div className="form-group">
-                                        <textarea autoFocus autoComplete="off" className="form-control" rows="20" id="data" name="data" required placeholder="Put the values separate by ';'. Click in the above Example button to see how to put the input in this tool."></textarea>
+                                        <textarea autoFocus autoComplete="off" className="form-control" rows="18" id="data" name="data" required placeholder="Put the values separate by ';'. Click in the above Example button to see how to put the input in this tool."></textarea>
                                     </div>
+                                    <a className="btn btn-outline-secondary btn-sm" id="btn-invert">Invert</a>
                                 </Card.Body>
                             </Card>
                         </div>
