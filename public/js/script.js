@@ -43,11 +43,11 @@ function getOutput(){
 	var option = $("#output").val();
 
 	if(option == "pdf"){
-		return "set terminal pdf size {SIZE} enhanced\n set output 'out.pdf'";
+		return "set terminal pdf size @SIZE@ enhanced\n set output 'out.pdf'";
 	}else if(option == "jpg"){
-		return "set terminal jpeg size {SIZE} enhanced\n set output 'out.jpg'";
+		return "set terminal jpeg size @SIZE@ enhanced\n set output 'out.jpg'";
 	}else if(option == "png"){
-		return "set terminal png size {SIZE} enhanced\n set output 'out.png'";
+		return "set terminal png size @SIZE@ enhanced\n set output 'out.png'";
 	}else{
 		throw Error("The output cannot be identified");
 	}
@@ -176,18 +176,18 @@ function generate(data){
 
 	var model = $("#model").text();
 
-	model = model.replaceAll("{X_TICS}", getTics(dim.x));
-	model = model.replaceAll("{Y_TICS}", getTics(dim.y));
-	model = model.replaceAll("{X_RANGE}", getRange(dim.x));
-	model = model.replaceAll("{Y_RANGE}", getRange(dim.y));
-	model = model.replaceAll("{SCALE}", $("#scale").val());
-	model = model.replaceAll("{CIRCLE_COLOR}", $("#circle-color").val());
-	model = model.replaceAll("{TEXT_COLOR}", $("#text-color").val());
-	model = model.replaceAll("{ROTATE}", "0");
-	model = model.replaceAll("{DATA_CIRCLE}", dataCircle);
-	model = model.replaceAll("{DATA_TEXT}", dataText);
-	model = model.replaceAll("{B_MARGIN}", getBottomMargim(dim.x));
-	model = model.replaceAll("{OUTPUT}", getOutput());
+	model = model.replaceAll("@X_TICS@", getTics(dim.x));
+	model = model.replaceAll("@Y_TICS@", getTics(dim.y));
+	model = model.replaceAll("@X_RANGE@", getRange(dim.x));
+	model = model.replaceAll("@Y_RANGE@", getRange(dim.y));
+	model = model.replaceAll("@SCALE@", $("#scale").val());
+	model = model.replaceAll("@CIRCLE_COLOR@", $("#circle-color").val());
+	model = model.replaceAll("@TEXT_COLOR@", $("#text-color").val());
+	model = model.replaceAll("@ROTATE@", "0");
+	model = model.replaceAll("@DATA_CIRCLE@", dataCircle);
+	model = model.replaceAll("@DATA_TEXT@", dataText);
+	model = model.replaceAll("@B_MARGIN@", getBottomMargim(dim.x));
+	model = model.replaceAll("@OUTPUT@", getOutput());
 
     var isWidescreen = false;
 
@@ -196,14 +196,14 @@ function generate(data){
     }
 
 	if(informations.length == 1){
-        model = model.replaceAll("{Y_AXIS}", "");
+        model = model.replaceAll("@Y_AXIS@", "");
 	}else if(informations.length == 2){
-        model = model.replaceAll("{Y_AXIS}", "set yzeroaxis \n set ytics axis \n set ytics center");
+        model = model.replaceAll("@Y_AXIS@", "set yzeroaxis \n set ytics axis \n set ytics center");
 	}else{
         alert("Only two dimensions are supported");
     }
 
-    model = model.replaceAll("{SIZE}", getSize(isWidescreen));
+    model = model.replaceAll("@SIZE@", getSize(isWidescreen));
 
 	$("#script").val(model);
 
@@ -238,29 +238,32 @@ function getExampleOfTwoInformations(){
 
 $(function(){
 
-	new Clipboard('#btn-copy');
+    new ClipboardJS('.btn');
 
-	$('#btn-generate').click(function (event) {
-		event.preventDefault();
+    $('#form-generate').submit((event) =>{
 
-		var data = $("#data").val().trim();
+        event.preventDefault();
 
-		if(data){
+        var data = $("#data").val().trim();
+
+		if (data) {
 			try{
 				generate(data);
 			}catch(error){
 				alert(error);
 			}
-		}else{
+		} else {
 			alert("Data field cannot be empty");
 		}
-	});
+
+        return false;
+    });
 
 	$("#btn-example-one-information").click(function(event){
-		$("#data").val(getExampleOfOneInformation());
+        $("#data").val(getExampleOfOneInformation());
 	});
 
-	$("#btn-example-two-informations").click(function(event){
+	$("#btn-example-two-information").click(function(event){
 		$("#data").val(getExampleOfTwoInformations());
 	});
 
@@ -279,9 +282,5 @@ $(function(){
 		a.click();
 
         return false;
-	});
-
-	$('.select').selectpicker({
-	  size: 8
 	});
 });

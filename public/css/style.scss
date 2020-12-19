@@ -1,0 +1,73 @@
+$color-foreground: #f8f8f2;
+$color-pink: #ff79c6;
+$color-purple: #bd93f9;
+$color-comment: #6272a4;
+$color-green: #50fa7b;
+$color-background: #282a36;
+$color-black: #2a2c37;
+
+body {
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    background-color: $color-foreground;
+    margin-top: 80px;
+}
+
+.card {
+
+    .card-header{
+        color: $color-foreground;
+        background-color: $color-comment;
+    }
+}
+
+.navbar-dark-theme {
+    background-color: $color-background;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+
+    .navbar-brand {
+
+        color: $color-foreground;
+
+        &:hover {
+            color: $color-pink;
+        }
+    }
+
+    .nav-item {
+
+        .nav-link {
+
+            color: $color-foreground;
+
+            &:hover {
+                color: $color-pink;
+            }
+        }
+    }
+
+    .navbar-toggler{
+        color: $color-pink;
+    }
+}
+
+.btn-success{
+    color: $color-black;
+    border: none;
+    background-color: $color-green;
+
+    &:hover {
+        color: $color-black;
+        background-color: darken($color-green, 20%);
+    }
+}
+
+.btn-primary{
+    color: $color-black;
+    border: none;
+    background-color: $color-pink;
+
+    &:hover {
+        color: $color-black;
+        background-color: darken($color-pink, 20%);
+    }
+}
