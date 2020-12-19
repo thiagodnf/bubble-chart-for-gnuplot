@@ -59,6 +59,8 @@ The result is:
 
 ## Screenshots
 
+![Screen Shot 2020-12-19 at 3 32 14 PM](https://user-images.githubusercontent.com/114015/102698977-66b4ce00-420f-11eb-837a-0de6c6feac8d.png)
+
 ## For Developers
 
 To run this project, run the following command:
