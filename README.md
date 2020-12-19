@@ -33,7 +33,7 @@ Blue;Rectangle;15
 
 The result is:
 
-![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/images/example_1.png)
+![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/example_1.png)
 
 #### Two Informations
 
@@ -55,7 +55,23 @@ Titanium;Rectangle;1
 
 The result is:
 
-![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/images/eample%20_2.png)
+![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/eample%20_2.png)
+
+## Screenshots
+
+## For Developers
+
+To run this project, run the following command:
+
+```sh
+npm run dev
+```
+
+If you want to commit some changes, run the following command:
+
+```sh
+npm run eslint-fix
+```
 
 ## Q&A
 
