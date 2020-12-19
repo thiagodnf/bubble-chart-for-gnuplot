@@ -1,8 +1,13 @@
 
 <img src="https://user-images.githubusercontent.com/114015/102698819-40daf980-420e-11eb-889d-550e1a44c253.png" width="400px"/>
 
-
 This tool generates a bubble chart script for Gnuplot
+
+[![GitHub Release](https://img.shields.io/github/release/thiagodnf/bubble-chart-for-gnuplot.svg)](https://github.com/thiagodnf/bubble-chart-for-gnuplot/releases/latest)
+[![GitHub contributors](https://img.shields.io/github/contributors/thiagodnf/bubble-chart-for-gnuplot.svg)](https://github.com/thiagodnf/bubble-chart-for-gnuplot/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/thiagodnf/bubble-chart-for-gnuplot.svg)](https://github.com/almende/thiagodnf/bubble-chart-for-gnuplot)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## How to use
 
