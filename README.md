@@ -35,9 +35,9 @@ The result is:
 
 ![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/example_1.png)
 
-#### Two Informations
+#### Two Information
 
-Separate the informations using the "#" character. The following code generates a chart with two Informations:
+Separate the information using the "#" character. The following code generates a chart with two information:
 
 ```text
 Red;Circle;10
