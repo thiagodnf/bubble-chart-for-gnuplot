@@ -1,273 +1,410 @@
 var minValue = 1,
-	maxValue = 30;
+    maxValue = 30;
 
-String.prototype.replaceAll = function(search, replacement) {
+const sorting ={
+    ascending: ascending,
+    descending: descending
+}
+
+String.prototype.replaceAll = function (search, replacement) {
     return this.split(search).join(replacement);
 };
 
-function getLineNumber(data, str){
-	var lines = data.trim().split(/\r*\n/);
+function getLineNumber(data, str) {
+    var lines = data.trim().split(/\r*\n/);
 
-	var foundLine = -1;
+    var foundLine = -1;
 
-	$.each(lines, function(index, line){
-		if(line.trim() == str.trim()){
-			foundLine = index + 1;
-		}
-	});
+    $.each(lines, function (index, line) {
+        if (line.trim() == str.trim()) {
+            foundLine = index + 1;
+        }
+    });
 
-	return foundLine;
+    return foundLine;
 }
 
-function getLines(str){
-	var lines = str.trim().split(/\r*\n/);
+function getLines(str) {
+    var lines = str.trim().split(/\r*\n/);
 
-	if(lines.length == 0){
-		throw Error("Lines cannot be empty");
-	}
+    if (lines.length == 0) {
+        throw Error("Lines cannot be empty");
+    }
 
-	return lines;
+    return lines;
 }
 
-function getSize(isWidescreen){
-	var option = $("#output").val();
+function getSize(isWidescreen) {
+    var option = $("#output").val();
 
-	if(option == "pdf"){
-		return (isWidescreen) ? "8,4" : "4,4";
-	}
+    if (option == "pdf") {
+        return (isWidescreen) ? "8,4" : "4,4";
+    }
 
-	return (isWidescreen) ? "800,400" : "400,400";
+    return (isWidescreen) ? "800,400" : "400,400";
 }
 
-function getOutput(){
-	var option = $("#output").val();
+function getOutput() {
+    var option = $("#output").val();
 
-	if(option == "pdf"){
-		return "set terminal pdf size @SIZE@ enhanced\n set output 'out.pdf'";
-	}else if(option == "jpg"){
-		return "set terminal jpeg size @SIZE@ enhanced\n set output 'out.jpg'";
-	}else if(option == "png"){
-		return "set terminal png size @SIZE@ enhanced\n set output 'out.png'";
-	}else{
-		throw Error("The output cannot be identified");
-	}
+    if (option == "pdf") {
+        return "set terminal pdf size @SIZE@ enhanced\n set output 'out.pdf'";
+    } else if (option == "jpg") {
+        return "set terminal jpeg size @SIZE@ enhanced\n set output 'out.jpg'";
+    } else if (option == "png") {
+        return "set terminal png size @SIZE@ enhanced\n set output 'out.png'";
+    } else {
+        throw Error("The output cannot be identified");
+    }
 }
 
-function getInformations(data){
-	var informations = data.trim().split(/\#/);
+function getBottomMargim(obj) {
+    var margin = 2;
 
-	var size = informations.length;
+    var maxValue = 0;
 
-	// Data validate
+    for (var i in obj) {
+        var value = i.split("\\n").length - 1;
 
-	if(size <= 0 || size >= 3){
-		throw Error("You should to define 1 or 2 informations. You defined " + size + " informations");
-	}
+        if (value > maxValue) {
+            maxValue = value;
+        }
+    }
 
-	$.each(informations, function(index, value){
-		if(value.trim() == ""){
-			throw Error("The dimension cannot be empty");
-		}
-	});
-
-	return informations;
+    return margin + maxValue;
 }
 
+function wrap(str) {
 
-function getRange(obj){
-	var min = Number.MAX_VALUE;
-	var max = Number.MIN_VALUE;
+    if ($("#wrap-text").val() == "Yes") {
+        return str.replaceAll(" ", "\\n");
+    }
 
-	for(var i in obj){
-		if(obj[i] < min){
-			min = obj[i];
-		}
-		if(obj[i] > max){
-			max = obj[i];
-		}
-	}
-
-	return (min-1) + ":" + (max + 1);
+    return str;
 }
 
-function getBottomMargim(obj){
-	var margin = 2;
+function getExampleOfOneInformation() {
+    var str = "";
 
-	var maxValue = 0;
+    str += "Red;Circle;10\n";
+    str += "White;Triangle;4\n";
+    str += "Red;Triangle;8\n";
+    str += "Green;Ellipse;1\n";
+    str += "Blue;Rectangle;15\n";
 
-	for(var i in obj){
-		var value = i.split("\\n").length-1;
-
-		if(value > maxValue){
-			maxValue = value;
-		}
-	}
-
-	return margin + maxValue;
+    return str;
 }
 
-function getTics(obj){
-	var tics = "";
+function getExampleOfTwoInformation() {
 
-	for(var i in obj){
-		tics += "\"" + i + "\" " + obj[i] + ",";
-	}
+    var str = getExampleOfOneInformation();
 
-	return tics.substring(0, tics.length - 1);;
+    str += "#\n";
+    str += "Gold;Circle;6\n";
+    str += "Silver;Rectangle;2\n";
+    str += "Silver;Triangle;7\n";
+    str += "Iron;Triangle;9\n";
+    str += "Titanium;Rectangle;1\n";
+
+    return str;
 }
 
-function wrap(str){
-	if($("#wrap-text").val() == "Yes"){
-		return str.replaceAll(" ","\\n");
-	}
+function getExampleOfFourInformation() {
 
-	return str;
+    var str = getExampleOfTwoInformation();
+
+    str += "#\n";
+    str += getExampleOfTwoInformation();
+
+    return str;
 }
 
-function generate(data){
-	var dim = {
-		x: {},
-		y: {},
-	};
+function generate(quadrants) {
 
-	var dataCircle = "",
-		dataText = "";
+    const xAxisPositiveSet = new Set();
+    const xAxisNegativeSet = new Set();
+    const yAxisPositiveSet = new Set();
+    const yAxisNegativeSet = new Set();
 
-	var indexX = 1;
-	var indexY = 1;
+    $.each(quadrants, function (quadrantIndex, quadrant) {
 
-	var informations = getInformations(data);
+        $.each(quadrant, function (dataIndex, data) {
 
-	$.each(informations, function(informationIndex, information){
-		var lines = getLines(information);
+            if (quadrantIndex == 0) {
+                xAxisPositiveSet.add(data.x);
+                yAxisPositiveSet.add(data.y);
+            }
 
-		$.each(lines, function(lineIndex, line){
-			var arrays = line.split(";");
+            if (quadrantIndex == 1) {
+                xAxisNegativeSet.add(data.x);
+                yAxisPositiveSet.add(data.y);
+            }
 
-			if(arrays.length != 3){
-				throw Error("A line should be 3 values separated by ';'. Line " + getLineNumber(data, line));
-			}
+            if (quadrantIndex == 2) {
+                xAxisNegativeSet.add(data.x);
+                yAxisNegativeSet.add(data.y);
+            }
 
-			$.each(arrays, function(index, array){
-				if( ! array.trim()){
-					throw Error("Column " + (index + 1) + " cannot be empty. Line " + getLineNumber(data, line));
-				}
+            if (quadrantIndex == 3) {
+                xAxisPositiveSet.add(data.x);
+                yAxisNegativeSet.add(data.y);
+            }
+        });
+    });
 
-				if(index == 2 && ! $.isNumeric(array)){
-					throw Error("Column 3 should be a number. Line " + getLineNumber(data, line));
-				}
-			});
+    let xAxisPositive = Array.from(xAxisPositiveSet);
+    let xAxisNegative = Array.from(xAxisNegativeSet);
+    let yAxisPositive = Array.from(yAxisPositiveSet);
+    let yAxisNegative = Array.from(yAxisNegativeSet);
 
-			if( ! dim.x[wrap(arrays[0])]){
-				dim.x[wrap(arrays[0])] = (informationIndex == 0)? indexX++: --indexX;
-			}
-			if( ! dim.y[wrap(arrays[1])]){
-				dim.y[wrap(arrays[1])] = indexY++;
-			}
+    xAxisPositive = xAxisPositive.sort(sorting[$("#positiveXAxis").val()]);
+    xAxisNegative = xAxisNegative.sort(sorting[$("#negativeXAxis").val()]);
+    yAxisPositive = yAxisPositive.sort(sorting[$("#positiveYAxis").val()]);
+    yAxisNegative = yAxisNegative.sort(sorting[$("#negativeYAxis").val()]);
 
-			var value = arrays[2] * (minValue / maxValue);
+    const circleSizes = [];
+    const circleTexts = [];
 
-			dataCircle += dim.x[wrap(arrays[0])] + " " + dim.y[wrap(arrays[1])] + " " + value + "\n";
-			dataText += dim.x[wrap(arrays[0])] + " " + dim.y[wrap(arrays[1])] + " " + arrays[2] + "\n";
-		});
+    $.each(quadrants, function (quadrantIndex, quadrant) {
 
-		indexX = 0;
-	});
+        $.each(quadrant, function (dataIndex, data) {
 
-	var model = $("#model").text();
+            let x = 0;
+            let y = 0;
+            const value = data.value;
+            const nValue = value * (minValue / maxValue);
 
-	model = model.replaceAll("@X_TICS@", getTics(dim.x));
-	model = model.replaceAll("@Y_TICS@", getTics(dim.y));
-	model = model.replaceAll("@X_RANGE@", getRange(dim.x));
-	model = model.replaceAll("@Y_RANGE@", getRange(dim.y));
-	model = model.replaceAll("@SCALE@", $("#scale").val());
-	model = model.replaceAll("@CIRCLE_COLOR@", $("#circle-color").val());
-	model = model.replaceAll("@TEXT_COLOR@", $("#text-color").val());
-	model = model.replaceAll("@ROTATE@", "0");
-	model = model.replaceAll("@DATA_CIRCLE@", dataCircle);
-	model = model.replaceAll("@DATA_TEXT@", dataText);
-	model = model.replaceAll("@B_MARGIN@", getBottomMargim(dim.x));
-	model = model.replaceAll("@OUTPUT@", getOutput());
+            if (quadrantIndex == 0) {
+                x = xAxisPositive.indexOf(data.x) + 1;
+                y = yAxisPositive.indexOf(data.y) + 1;
+            }
+
+            if (quadrantIndex == 1) {
+                x = xAxisNegative.indexOf(data.x) + 1;
+                y = yAxisPositive.indexOf(data.y) + 1;
+                x *= -1;
+            }
+
+            if (quadrantIndex == 2) {
+                x = xAxisNegative.indexOf(data.x) + 1;
+                y = yAxisNegative.indexOf(data.y) + 1;
+                x *= -1;
+                y *= -1;
+            }
+
+            if (quadrantIndex == 3) {
+                x = xAxisPositive.indexOf(data.x) + 1;
+                y = yAxisNegative.indexOf(data.y) + 1;
+                y *= -1;
+            }
+
+            circleSizes.push(`${x} ${y} ${nValue}`);
+            circleTexts.push(`${x} ${y} ${value}`);
+        });
+    });
+
+    const circleSize = circleSizes.join("\n");
+    const circleText = circleTexts.join("\n");
+
+    const xTics = getAxis(xAxisPositive, xAxisNegative);
+    const yTics = getAxis(yAxisPositive, yAxisNegative);
+
+    const rangeX = getRange(xAxisPositive, xAxisNegative);
+    const rangeY = getRange(yAxisPositive, yAxisNegative);
+
+    generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, rangeY);
+}
+
+function generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, rangeY){
+
+    var model = $("#model").text();
+
+    model = model.replaceAll("@X_TICS@", xTics);
+    model = model.replaceAll("@Y_TICS@", yTics);
+    model = model.replaceAll("@X_RANGE@", rangeX);
+    model = model.replaceAll("@Y_RANGE@", rangeY);
+    model = model.replaceAll("@SCALE@", $("#scale").val());
+    model = model.replaceAll("@CIRCLE_COLOR@", $("#circle-color").val());
+    model = model.replaceAll("@TEXT_COLOR@", $("#text-color").val());
+    model = model.replaceAll("@ROTATE@", "0");
+    model = model.replaceAll("@DATA_CIRCLE@", circleSize);
+    model = model.replaceAll("@DATA_TEXT@", circleText);
+    model = model.replaceAll("@B_MARGIN@", 2);
+    model = model.replaceAll("@OUTPUT@", getOutput());
 
     var isWidescreen = false;
 
-    if($("#widescreen").val() == 1){
+    if ($("#widescreen").val() == 1) {
         isWidescreen = true;
     }
 
-	if(informations.length == 1){
+    if (quadrants.length == 1) {
         model = model.replaceAll("@Y_AXIS@", "");
-	}else if(informations.length == 2){
+    } else if (quadrants.length >= 2) {
         model = model.replaceAll("@Y_AXIS@", "set yzeroaxis \n set ytics axis \n set ytics center");
-	}else{
-        alert("Only two dimensions are supported");
     }
 
     model = model.replaceAll("@SIZE@", getSize(isWidescreen));
 
-	$("#script").val(model);
+    $("#script").val(model);
 
-	$("#modal-result").modal("show");
+    $("#modal-result").modal("show");
 }
 
-function getExampleOfOneInformation(){
-	var str = "";
+function getAxis(positiveArray, negativeArray) {
 
-	str += "Red;Circle;10\n";
-	str += "White;Triangle;4\n";
-	str += "Red;Triangle;8\n";
-	str += "Green;Ellipse;1\n";
-	str += "Blue;Rectangle;15\n";
+    const tics = [];
 
-	return str;
+    $.each(positiveArray, function (i, value) {
+        tics.push(`"${value}" ${i + 1}`);
+    });
+
+    $.each(negativeArray, function (i, value) {
+        tics.push(`"${value}" -${i + 1}`);
+    });
+
+    return tics.join(",");
 }
 
-function getExampleOfTwoInformation(){
+function getRange(positiveArray, negativeArray) {
 
-	var str = getExampleOfOneInformation();
+    let min = -negativeArray.length;
+    let max = positiveArray.length;
 
-	str += "#\n";
-	str += "Gold;Circle;6\n";
-	str += "Silver;Rectangle;2\n";
-	str += "Silver;Triangle;7\n";
-	str += "Iron;Triangle;9\n";
-	str += "Titanium;Rectangle;1\n";
+    if (min !== 0) {
+        min--;
+    }
 
-	return str;
+    max++;
+
+    return `${min}:${max}`;
 }
 
-$(function(){
+function ascending(a, b) {
+
+    if (a < b) {
+        return -1;
+    }
+
+    if (a > b) {
+        return 1;
+    }
+
+    return 0;
+}
+
+function descending(a, b) {
+
+    if (a < b) {
+        return 1;
+    }
+
+    if (a > b) {
+        return -1;
+    }
+
+    return 0;
+}
+
+function parse(data) {
+
+    if (!data) {
+        throw new Error("Data field cannot be empty")
+    }
+
+    var quadrants = data.trim().split(/\#/);
+
+    if (quadrants.length < 1 || quadrants.length > 4) {
+        throw Error(`You should to define 1 or 2 quadrants but you defined ${quadrants.length}`);
+    }
+
+    const output = [];
+
+    $.each(quadrants, function (i, quadrant) {
+
+        quadrant = quadrant.trim();
+
+        if (!quadrant) {
+            throw Error("Quadrant cannot be empty");
+        }
+
+        const lines = quadrant.trim().split(/\r*\n/);
+
+        if (lines.length == 0) {
+            throw Error("Lines cannot be empty");
+        }
+
+        const data = [];
+
+        $.each(lines, function (lineIndex, line) {
+
+            var columns = line.split(";");
+
+            if (columns.length != 3) {
+                throw Error("A line should be 3 values separated by ';'. Line " + getLineNumber(data, line));
+            }
+
+            const x = columns[0].trim();
+            const y = columns[1].trim();
+            const value = columns[2].trim();
+
+            if (!x) {
+                throw Error(`Column 1 cannot be empty. Line ${lineIndex} `);
+            }
+
+            if (!y) {
+                throw Error(`Column 2 cannot be empty. Line ${lineIndex} `);
+            }
+
+            if (isNaN(value)) {
+                throw Error(`Column 3 should be a number.. Line ${lineIndex} `);
+            }
+
+            data.push({
+                x: x,
+                y: y,
+                value: parseFloat(value)
+            });
+        });
+
+        output.push(data);
+    });
+
+    return output;
+}
+
+$(function () {
+
+    window.onerror = function (msg, url, line) {
+        alert(msg);
+    }
 
     new ClipboardJS(".btn");
 
-    $("#form-generate").submit((event) =>{
+    $("#form-generate").submit((event) => {
 
         event.preventDefault();
 
         var data = $("#data").val().trim();
 
-		if (data) {
-			try{
-				generate(data);
-			}catch(error){
-				alert(error);
-			}
-		} else {
-			alert("Data field cannot be empty");
-		}
+        generate(parse(data));
 
         return false;
     });
 
-	$("#btn-example-one-information").click(function(event){
+    $("#btn-example-one-quadrant").click(function (event) {
         $("#data").val(getExampleOfOneInformation());
-	});
-
-	$("#btn-example-two-information").click(function(event){
-		$("#data").val(getExampleOfTwoInformation());
     });
 
-    $("#btn-invert").click(function(event){
+    $("#btn-example-two-quadrants").click(function (event) {
+        $("#data").val(getExampleOfTwoInformation());
+    });
+
+    $("#btn-example-four-quadrants").click(function (event) {
+        $("#data").val(getExampleOfFourInformation());
+    });
+
+    $("#btn-invert").click(function (event) {
 
         const data = $("#data").val().trim();
 
@@ -301,20 +438,20 @@ $(function(){
         $("#data").val(output.join('\n'));
     });
 
-	$("#export").click(function(event){
+    $("#export").click(function (event) {
         event.preventDefault();
 
-		var script = $("#script").val();
+        var script = $("#script").val();
 
-		var blob = new Blob([script], {type: "text/plain;charset=utf-8"});
+        var blob = new Blob([script], { type: "text/plain;charset=utf-8" });
 
-		var a = document.createElement("a");
-		document.body.appendChild(a);
-    	a.style = "display: none";
-		a.href = window.URL.createObjectURL(blob);
-		a.download = "script.gnu";
-		a.click();
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "script.gnu";
+        a.click();
 
         return false;
-	});
+    });
 });

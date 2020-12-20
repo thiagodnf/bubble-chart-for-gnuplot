@@ -102,6 +102,47 @@ function Index(props) {
                                             </div>
                                         </div>
                                     </div>
+                                    <p className="font-weight-bold">Sorting</p>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="form-group">
+                                                <label htmlFor="positiveXAxis">Positive X-Axis</label>
+                                                <select className="form-control selectPicker" id="positiveXAxis" defaultValue={"ascending"}>
+                                                    <option value="ascending">Ascending</option>
+                                                    <option value="descending">Descending</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-6">
+                                            <div className="form-group">
+                                                <label htmlFor="positiveYAxis">Positive Y-Axis</label>
+                                                <select className="form-control selectPicker" id="positiveYAxis" defaultValue={"ascending"}>
+                                                    <option value="ascending">Ascending</option>
+                                                    <option value="descending">Descending</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="form-group">
+                                                <label htmlFor="negativeXAxis">Negative X-Axis</label>
+                                                <select className="form-control selectPicker" id="negativeXAxis" defaultValue={"ascending"}>
+                                                    <option value="ascending">Ascending</option>
+                                                    <option value="descending">Descending</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-6">
+                                            <div className="form-group">
+                                                <label htmlFor="negativeYAxis">Negative Y-Axis</label>
+                                                <select className="form-control selectPicker" id="negativeYAxis" defaultValue={"ascending"}>
+                                                    <option value="ascending">Ascending</option>
+                                                    <option value="descending">Descending</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr className="mt-0"/>
                                     <button className="btn btn-primary" id="btn-generate">Generate</button>
                                 </Card.Body>

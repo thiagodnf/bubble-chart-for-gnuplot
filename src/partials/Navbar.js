@@ -16,8 +16,9 @@ function Component() {
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Examples</a>
                         <div className="dropdown-menu">
-                            <a className="dropdown-item" href="#" id="btn-example-one-information">One Information</a>
-                            <a className="dropdown-item" href="#" id="btn-example-two-information">Two Information</a>
+                            <a className="dropdown-item" href="#" id="btn-example-one-quadrant">One Quadrant</a>
+                            <a className="dropdown-item" href="#" id="btn-example-two-quadrants">Two Quadrants</a>
+                            <a className="dropdown-item" href="#" id="btn-example-four-quadrants">Four Quadrants</a>
                         </div>
                     </li>
                 </Nav>
