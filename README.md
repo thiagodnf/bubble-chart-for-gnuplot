@@ -11,7 +11,7 @@ This tool generates a bubble chart script for Gnuplot
 
 ## Usage
 
-You need to enter labels separated by ";". Further information, use the "example" option on app. Generate the script and run following command on terminal:
+You need to enter labels separated by ";". Further quadrants, use the "example" option on app. Generate the script and run following command on terminal:
 
 ```sh
 $ gnuplot script.gnu
@@ -21,7 +21,7 @@ Next, you can see some examples of generated results.
 
 #### One Quadrant
 
-The following code generates a chart with one Information:
+The following code generates a chart with one quadrant:
 
 ```text
 Red;Circle;10
@@ -37,7 +37,7 @@ The result is:
 
 #### Two Quadrants
 
-Separate the information using the "#" character. The following code generates a chart with two information:
+Separate the quadrant by using the "#" character. The following code generates a chart with two quadrants:
 
 ```text
 Red;Circle;10
@@ -59,7 +59,7 @@ The result is:
 
 #### Four Quadrants
 
-Separate the information using the "#" character. The following code generates a chart with two information:
+Separate the quadrant by using the "#" character. The following code generates a chart with two quadrant:
 
 ```
 Red;Circle;10
