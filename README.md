@@ -19,7 +19,7 @@ $ gnuplot script.gnu
 
 Next, you can see some examples of generated results.
 
-#### One Information
+#### One Quadrant
 
 The following code generates a chart with one Information:
 
@@ -35,7 +35,7 @@ The result is:
 
 ![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/example_1.png)
 
-#### Two Information
+#### Two Quadrants
 
 Separate the information using the "#" character. The following code generates a chart with two information:
 
@@ -56,6 +56,41 @@ Titanium;Rectangle;1
 The result is:
 
 ![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/eample%20_2.png)
+
+#### Four Quadrants
+
+Separate the information using the "#" character. The following code generates a chart with two information:
+
+```
+Red;Circle;10
+White;Triangle;4
+Red;Triangle;8
+Green;Ellipse;1
+Blue;Rectangle;15
+#
+Gold;Circle;6
+Silver;Rectangle;2
+Silver;Triangle;7
+Iron;Triangle;9
+Titanium;Rectangle;1
+#
+Red;Circle;10
+White;Triangle;4
+Red;Triangle;8
+Green;Ellipse;1
+Blue;Rectangle;15
+#
+Gold;Circle;6
+Silver;Rectangle;2
+Silver;Triangle;7
+Iron;Triangle;9
+Titanium;Rectangle;1
+```
+
+The result is:
+
+![Screen Shot 2020-12-21 at 9 08 42 PM](https://user-images.githubusercontent.com/114015/102840369-b7275980-43d0-11eb-94d3-0ed9cf4c110a.png)
+
 
 ## Screenshots
 

@@ -241,7 +241,13 @@ function generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, 
     if (quadrants.length == 1) {
         model = model.replaceAll("@Y_AXIS@", "");
     } else if (quadrants.length >= 2) {
-        model = model.replaceAll("@Y_AXIS@", "set yzeroaxis \n set ytics axis \n set ytics center");
+        model = model.replaceAll("@Y_AXIS@", "set yzeroaxis\nset ytics axis\nset ytics center");
+    }
+
+    if (quadrants.length >= 3) {
+        model = model.replaceAll("@X_AXIS@", "set xzeroaxis\nset xtics axis");
+    } else{
+        model = model.replaceAll("@X_AXIS@", "");
     }
 
     model = model.replaceAll("@SIZE@", getSize(isWidescreen));

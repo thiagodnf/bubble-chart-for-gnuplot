@@ -11,6 +11,8 @@ scale = @SCALE@
 
 @Y_AXIS@
 
+@X_AXIS@
+
 set bmargin @B_MARGIN@
 
 set xtics rotate by @ROTATE@ offset 0,0
