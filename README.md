@@ -9,6 +9,10 @@ This tool generates a bubble chart script for Gnuplot
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+## Usage
+
+Just open https://bubble-chart-for-gnuplot.vercel.app
+
 ## Screenshots
 
 <img class="screenshot" src="https://user-images.githubusercontent.com/114015/102698977-66b4ce00-420f-11eb-837a-0de6c6feac8d.png" />
