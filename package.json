@@ -11,6 +11,9 @@
 	"files": [
 		"app.js"
 	],
+    "engines": {
+        "node": ">=16.0.0"
+      },
 	"author": "Thiago Ferreira",
 	"license": "MIT",
 	"homepage": "https://github.com/thiagodnf/bubble-chart-for-gnuplot",
