@@ -9,6 +9,11 @@ This tool generates a bubble chart script for Gnuplot
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+## Screenshots
+
+<img class="screenshot" src="https://user-images.githubusercontent.com/114015/102698977-66b4ce00-420f-11eb-837a-0de6c6feac8d.png" />
+
+
 ## Usage
 
 You need to enter labels separated by ";". Further quadrants, use the "example" option on app. Generate the script and run following command on terminal:
@@ -33,7 +38,7 @@ Blue;Rectangle;15
 
 The result is:
 
-![alt tag](https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/example_1.png)
+<img src="https://raw.githubusercontent.com/thiagodnf/bubble-chart-for-gnuplot/master/public/images/example_1.png" />
 
 #### Two Quadrants
 
@@ -90,11 +95,6 @@ Titanium;Rectangle;1
 The result is:
 
 ![Screen Shot 2020-12-21 at 9 08 42 PM](https://user-images.githubusercontent.com/114015/102840369-b7275980-43d0-11eb-94d3-0ed9cf4c110a.png)
-
-
-## Screenshots
-
-![Screen Shot 2020-12-19 at 3 32 14 PM](https://user-images.githubusercontent.com/114015/102698977-66b4ce00-420f-11eb-837a-0de6c6feac8d.png)
 
 ## For Developers
 
