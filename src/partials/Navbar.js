@@ -8,10 +8,8 @@ function Component() {
     return (
         <Navbar expand="lg" className="navbar-dark-theme" fixed="top">
             <Navbar.Brand href="#home">Bubble Chart for Gnuplot</Navbar.Brand>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i className="fas fa-bars"></i>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <Navbar.Toggle aria-controls="navbarSupportedContent" />
+            <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Examples</a>
@@ -22,10 +20,10 @@ function Component() {
                         </div>
                     </li>
                 </Nav>
-                <Form inline>
+                <Form className="d-flex">
                     <a className="btn btn-success" target="_blank" href="https://github.com/thiagodnf/bubble-chart-for-gnuplot">Contribute</a>
                 </Form>
-            </div>
+            </Navbar.Collapse>
         </Navbar>
     );
 }
