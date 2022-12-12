@@ -1,13 +1,13 @@
 import Head from "next/head";
 
-function Component(props) {
+function Component() {
 
     return (
         <Head>
 
             <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
-            <meta name="description" content="Generate a gnuplot script by containing a bubble chart"/>
+            <meta name="description" content="Generate gnuplot scripts for bubble charts"/>
             <meta name="author" content="Thiago Nascimento"/>
             <meta name="keywords" content="bubble chart, gnuplot, bubble chart for gnuplot"/>
             <meta name="mobile-web-app-capable" content="yes"/>

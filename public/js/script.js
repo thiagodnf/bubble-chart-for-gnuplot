@@ -4,7 +4,7 @@ var minValue = 1,
 const sorting ={
     ascending: ascending,
     descending: descending
-}
+};
 
 String.prototype.replaceAll = function (search, replacement) {
     return this.split(search).join(replacement);
@@ -315,7 +315,7 @@ function descending(a, b) {
 function parse(data) {
 
     if (!data) {
-        throw new Error("Data field cannot be empty")
+        throw new Error("Data field cannot be empty");
     }
 
     var quadrants = data.trim().split(/\#/);
@@ -379,11 +379,18 @@ function parse(data) {
     return output;
 }
 
+function resizeCanvas(){
+
+    $(".card").height($(window).height()-110);
+}
+
 $(function () {
 
     window.onerror = function (msg, url, line) {
         alert(msg);
-    }
+    };
+
+    $(window).resize(resizeCanvas).trigger("resize");
 
     new ClipboardJS(".btn");
 
@@ -434,14 +441,14 @@ $(function () {
                 columns[0] = columns[1];
                 columns[1] = aux;
 
-                output.push(columns.join(';'));
+                output.push(columns.join(";"));
 
             } else {
                 output.push(line);
             }
         });
 
-        $("#data").val(output.join('\n'));
+        $("#data").val(output.join("\n"));
     });
 
     $("#export").click(function (event) {
