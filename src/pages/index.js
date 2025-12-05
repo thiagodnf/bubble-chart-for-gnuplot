@@ -1,4 +1,4 @@
-import {Card, Col} from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 import Navbar from "../partials/Navbar";
 import Head from "../partials/Head";
@@ -12,9 +12,9 @@ function Index(props) {
         <div>
             <Head />
             <Navbar />
-            <div className="container-fluid">
-                <form id="form-generate" action="#">
-                    <div className="row">
+            <form id="form-generate" action="#">
+                <Container fluid>
+                    <Row>
                         <Col xs="12" sm="6" md="8" lg="9" className="mb-3">
                             <Card className="shadow">
                                 <Card.Header>Data</Card.Header>
@@ -35,16 +35,16 @@ function Index(props) {
                                             <div className="form-group">
                                                 <label htmlFor="circle-color">Circle Color</label>
                                                 <select className="form-control form-control-sm selectPicker" id="circle-color" defaultValue={"#7cb5ec"}>
-                                                    <option style={{background: "#7cb5ec"}} value="#7cb5ec">Blue</option>
-                                                    <option style={{background: "#434348"}} value="#434348">Black</option>
-                                                    <option style={{background: "#90ed7d"}} value="#90ed7d">Green</option>
-                                                    <option style={{background: "#f7a35c"}} value="#f7a35c">Orange</option>
-                                                    <option style={{background: "#8085e9"}} value="#8085e9">Purple</option>
-                                                    <option style={{background: "#f15c80"}} value="#f15c80">Pink</option>
-                                                    <option style={{background: "#e4d354"}} value="#e4d354">Yellow</option>
-                                                    <option style={{background: "#2b908f"}} value="#2b908f">Cornflower Blue</option>
-                                                    <option style={{background: "#f45b5b"}} value="#f45b5b">Red</option>
-                                                    <option style={{background: "#91e8e1"}} value="#91e8e1">Aquamarine</option>
+                                                    <option style={{ background: "#7cb5ec" }} value="#7cb5ec">Blue</option>
+                                                    <option style={{ background: "#434348" }} value="#434348">Black</option>
+                                                    <option style={{ background: "#90ed7d" }} value="#90ed7d">Green</option>
+                                                    <option style={{ background: "#f7a35c" }} value="#f7a35c">Orange</option>
+                                                    <option style={{ background: "#8085e9" }} value="#8085e9">Purple</option>
+                                                    <option style={{ background: "#f15c80" }} value="#f15c80">Pink</option>
+                                                    <option style={{ background: "#e4d354" }} value="#e4d354">Yellow</option>
+                                                    <option style={{ background: "#2b908f" }} value="#2b908f">Cornflower Blue</option>
+                                                    <option style={{ background: "#f45b5b" }} value="#f45b5b">Red</option>
+                                                    <option style={{ background: "#91e8e1" }} value="#91e8e1">Aquamarine</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -143,20 +143,20 @@ function Index(props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <hr className="mt-0"/>
+                                    <hr className="mt-0" />
                                     <button className="btn btn-primary" id="btn-generate">Generate</button>
                                 </Card.Body>
                             </Card>
                         </Col>
-                    </div>
-                </form>
-            </div>
+                    </Row>
+                </Container>
+            </form>
 
             <textarea className="d-none" id="model" defaultValue={props.template}></textarea>
 
-            <ModalResult/>
+            <ModalResult />
 
-            <Footer/>
+            <Footer />
         </div>
     );
 }

@@ -23,10 +23,6 @@ function Component() {
             <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png"/>
             <link rel="manifest" href="/images/favicons/site.webmanifest"/>
 
-            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossOrigin="anonymous"/>
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
-            <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source Sans Pro'></link>
-
         </Head>
     );
 }

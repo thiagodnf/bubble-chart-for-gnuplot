@@ -1,7 +1,7 @@
 var minValue = 1,
     maxValue = 30;
 
-const sorting ={
+const sorting = {
     ascending: ascending,
     descending: descending
 };
@@ -215,7 +215,7 @@ function generate(quadrants) {
     generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, rangeY);
 }
 
-function generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, rangeY){
+function generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, rangeY) {
 
     var model = $("#model").text();
 
@@ -246,7 +246,7 @@ function generateModel(quadrants, circleSize, circleText, xTics, yTics, rangeX, 
 
     if (quadrants.length >= 3) {
         model = model.replaceAll("@X_AXIS@", "set xzeroaxis\nset xtics axis");
-    } else{
+    } else {
         model = model.replaceAll("@X_AXIS@", "");
     }
 
@@ -379,9 +379,9 @@ function parse(data) {
     return output;
 }
 
-function resizeCanvas(){
+function resizeCanvas() {
 
-    $(".card").height($(window).height()-110);
+    $(".card").height($(window).height() - 110);
 }
 
 $(function () {
@@ -390,11 +390,11 @@ $(function () {
         alert(msg);
     };
 
-    $(window).resize(resizeCanvas).trigger("resize");
+    // $(window).resize(resizeCanvas).trigger("resize");
 
     new ClipboardJS(".btn");
 
-    $("#form-generate").submit((event) => {
+    $(document).on("submit", "#form-generate", function (event) {
 
         event.preventDefault();
 
@@ -405,19 +405,19 @@ $(function () {
         return false;
     });
 
-    $("#btn-example-one-quadrant").click(function (event) {
+    $(document).on("click", "#btn-example-one-quadrant", function () {
         $("#data").val(getExampleOfOneInformation());
     });
 
-    $("#btn-example-two-quadrants").click(function (event) {
+    $(document).on("click", "#btn-example-two-quadrants", function () {
         $("#data").val(getExampleOfTwoInformation());
     });
 
-    $("#btn-example-four-quadrants").click(function (event) {
+    $(document).on("click", "#btn-example-four-quadrants", function () {
         $("#data").val(getExampleOfFourInformation());
     });
 
-    $("#btn-invert").click(function (event) {
+    $(document).on("click", "#btn-invert", function () {
 
         const data = $("#data").val().trim();
 
@@ -451,7 +451,8 @@ $(function () {
         $("#data").val(output.join("\n"));
     });
 
-    $("#export").click(function (event) {
+    $(document).on("click", "#export", function (event) {
+
         event.preventDefault();
 
         var script = $("#script").val();

@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"lint": "npx eslint .",
 		"lint-fix": "npx eslint . --fix",
-        "update-dependencies": "ncu -u"
+        "update-dependencies": "npx npm-check-updates -u"
 	},
 	"files": [
 		"app.js"
@@ -18,13 +18,15 @@
 	"license": "MIT",
 	"homepage": "https://github.com/thiagodnf/bubble-chart-for-gnuplot",
 	"dependencies": {
-		"babel-eslint": "10.1.0",
-		"eslint": "8.29.0",
-		"next": "13.0.6",
-		"react": "18.2.0",
-		"react-bootstrap": "2.7.0",
-		"react-dom": "18.2.0",
-		"sass": "1.56.2",
+        "bootstrap": "5.3.8",
+        "bootstrap-icons": "1.13.1",
+		"@babel/eslint-parser": "7.28.5",
+		"eslint": "9.39.1",
+		"next": "16.0.7",
+		"react": "19.2.1",
+		"react-bootstrap": "2.10.10",
+		"react-dom": "19.2.1",
+		"sass": "1.94.2",
 		"txt-reader": "1.4.5"
 	}
 }
